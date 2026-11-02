@@ -9,7 +9,7 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap"
+  display: "swap",
 });
 
 const poppins = Poppins({
@@ -24,12 +24,16 @@ const Footer = dynamic(() => import("@/src/components/shared/Footer"), {
 });
 
 export const metadata: Metadata = {
-  title: { default: "DreamHouse | Build Your Dream Home in Tamil Nadu", template: "%s | DreamHouse" },
-  description: "Find verified civil engineers, calculate construction costs, and explore material shops near you.",
+  title: {
+    default: "DreamHouse | Build Your Dream Home in Tamil Nadu",
+    template: "%s | DreamHouse",
+  },
+  description:
+    "Find verified construction companies and civil engineers across Tamil Nadu. Transparent pricing, quality homes.",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#2563eb",
+  themeColor: "#1e1b4b",
   width: "device-width",
   initialScale: 1,
 };
@@ -40,15 +44,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="font-sans antialiased bg-white text-gray-900 flex flex-col min-h-screen">
-
         {/* Navbar */}
-        <Suspense fallback={<div className="h-24 w-full bg-white/70 backdrop-blur-xl border-b border-gray-200" />}>
+        <Suspense
+          fallback={
+            <div className="h-24 w-full bg-white/70 backdrop-blur-xl border-b border-gray-200" />
+          }
+        >
           <Navbar />
         </Suspense>
 
-        <main className="flex-grow pt-24">
-          {children}
-        </main>
+        <main className="flex-grow pt-24">{children}</main>
+
         {/* Footer */}
         <Footer />
         <Toaster position="top-right" richColors closeButton />
