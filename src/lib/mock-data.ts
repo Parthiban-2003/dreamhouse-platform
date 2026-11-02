@@ -1,87 +1,311 @@
-import { Engineer } from "@/src/types";
-import { Review } from "@/src/types";
+import { Engineer, Company, Review, Project } from "@/src/types";
 
-export const mockReviews: Review[] = [
+const sharedProjects: Project[] = [
     {
-        id: "r1",
-        clientName: "Vignesh Kumar",
-        clientImage: "https://i.pravatar.cc/150?img=68",
-        engineerName: "Rajesh Kumar",
-        projectType: "3BHK Luxury Villa",
+        id: "p1",
+        title: "Luxury 3BHK Villa",
         location: "OMR, Chennai",
-        rating: 5,
-        reviewText: "Rajesh sir is extremely professional. He completed our 3BHK villa 2 weeks ahead of schedule. The material quality was exactly as promised. No hidden costs at all! Truly a dream home.",
-        date: "Oct 2025",
-        isVerified: true,
-        projectImage: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600"
+        image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800",
+        year: "2024",
+        area: "2,800 sq.ft",
+        duration: "10 Months",
+        budget: "₹52 Lakhs",
+        style: "Modern Contemporary",
+        description:
+            "A stunning 3BHK independent villa featuring a double-height living room, floor-to-ceiling glass windows, and a private swimming pool. Built with premium AAC blocks and earthquake-resistant structure.",
+        features: [
+            "Smart Home Automation",
+            "Solar Water Heating",
+            "Rainwater Harvesting",
+            "Italian Marble Flooring",
+            "Home Theater",
+        ],
     },
     {
-        id: "r2",
-        clientName: "Priya Ramesh",
-        clientImage: "https://i.pravatar.cc/150?img=44",
-        engineerName: "Suresh Babu",
-        projectType: "Eco-Friendly Home",
-        location: "RS Puram, Coimbatore",
-        rating: 5,
-        reviewText: "We wanted a solar-powered home, and Suresh sir delivered beyond expectations. Our electricity bill is almost zero now! Highly recommended for green homes.",
-        date: "Aug 2025",
-        isVerified: true,
+        id: "p2",
+        title: "Modern Duplex House",
+        location: "Anna Nagar, Chennai",
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+        year: "2023",
+        area: "1,850 sq.ft",
+        duration: "7 Months",
+        budget: "₹34 Lakhs",
+        style: "Minimalist Urban",
+        description:
+            "A compact yet spacious duplex designed for a nuclear family. Optimized for natural ventilation and maximum daylight. Features a modular kitchen and a rooftop terrace garden.",
+        features: [
+            "Modular Kitchen",
+            "Rooftop Garden",
+            "CCTV Surveillance",
+            "EV Charging Point",
+            "Vastu Compliant",
+        ],
     },
     {
-        id: "r3",
-        clientName: "Karthikeyan S",
-        clientImage: "https://i.pravatar.cc/150?img=12",
-        engineerName: "Murugan S",
-        projectType: "Traditional 4BHK",
+        id: "p3",
+        title: "Eco-Friendly Home",
+        location: "ECR, Chennai",
+        image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
+        year: "2024",
+        area: "3,200 sq.ft",
+        duration: "12 Months",
+        budget: "₹65 Lakhs",
+        style: "Sustainable Green Architecture",
+        description:
+            "A 100% eco-friendly home built using recycled materials and sustainable practices. Features a zero-electricity billing design with integrated wind and solar energy systems.",
+        features: [
+            "100% Solar Powered",
+            "Greywater Recycling",
+            "Bamboo Accents",
+            "Green Roof",
+            "Organic Waste Composter",
+        ],
+    },
+    {
+        id: "p4",
+        title: "Traditional Chettinad Home",
         location: "KK Nagar, Madurai",
-        rating: 4,
-        reviewText: "Murugan sir has great knowledge in Vastu and traditional architecture. The woodwork in our house is stunning. Slight delay in plumbing, but overall a great experience.",
-        date: "Sep 2025",
-        isVerified: true,
-        projectImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600"
+        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800",
+        year: "2023",
+        area: "4,100 sq.ft",
+        duration: "14 Months",
+        budget: "₹78 Lakhs",
+        style: "Heritage Chettinad",
+        description:
+            "Authentic Chettinad architecture blended with modern amenities. Intricate woodwork, central courtyard, and traditional Athangudi tiles.",
+        features: [
+            "Central Courtyard",
+            "Athangudi Tiles",
+            "Teak Wood Work",
+            "Vastu Perfect",
+            "Heritage Lighting",
+        ],
     },
     {
-        id: "r4",
-        clientName: "Anitha Devi",
-        clientImage: "https://i.pravatar.cc/150?img=5",
-        engineerName: "Karthik R",
-        projectType: "Smart Studio Apartment",
-        location: "Gandhipuram, Coimbatore",
-        rating: 5,
-        reviewText: "Karthik integrated Alexa and smart lighting perfectly into our small apartment. Space utilization was 10/10. Very modern approach!",
-        date: "Nov 2025",
-        isVerified: true,
+        id: "p5",
+        title: "Smart Studio Apartment",
+        location: "RS Puram, Coimbatore",
+        image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800",
+        year: "2025",
+        area: "650 sq.ft",
+        duration: "5 Months",
+        budget: "₹18 Lakhs",
+        style: "Compact Smart Living",
+        description:
+            "Fully IoT-integrated studio apartment with space-saving furniture and voice-controlled lighting & AC.",
+        features: [
+            "Alexa Integration",
+            "Space Saving Furniture",
+            "Smart Lighting",
+            "Energy Monitoring",
+            "Modular Wardrobe",
+        ],
     },
-    {
-        id: "r5",
-        clientName: "Rahul & Sneha",
-        clientImage: "https://i.pravatar.cc/150?img=33",
-        engineerName: "Venkatesh P",
-        projectType: "Farmhouse",
-        location: "Yercaud, Salem",
-        rating: 5,
-        reviewText: "Building a farmhouse in a hilly area was tough, but Venkatesh sir handled the terrain perfectly. The stone finishing looks absolutely royal.",
-        date: "Jul 2025",
-        isVerified: true,
-        projectImage: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600"
-    },
-    {
-        id: "r6",
-        clientName: "Mohammed Irfan",
-        clientImage: "https://i.pravatar.cc/150?img=53",
-        engineerName: "Rajesh Kumar",
-        projectType: "Commercial Complex",
-        location: "T. Nagar, Chennai",
-        rating: 5,
-        reviewText: "Handled our 3-story commercial building with strict adherence to safety norms. The fire safety and electrical planning were top-notch.",
-        date: "Jun 2025",
-        isVerified: true,
-    }
 ];
 
+// Companies
+export const mockCompanies: Company[] = [
+    {
+        id: "c1",
+        name: "Skyline Constructions",
+        tagline: "Building Tomorrow's Homes Today",
+        description:
+            "Skyline Constructions is Chennai's premier residential construction firm with 18+ years of excellence. We specialize in luxury villas, apartments and commercial spaces with transparent pricing and on-time delivery.",
+        district: "Chennai",
+        location: "Anna Nagar, Chennai",
+        pincode: "600040",
+        lat: 13.085,
+        lng: 80.2101,
+        logo: "https://i.pravatar.cc/150?img=11",
+        coverImage:
+            "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200",
+        rating: 4.9,
+        totalProjects: 312,
+        yearEstablished: 2006,
+        teamSize: 85,
+        phone: "+91 98765 43210",
+        email: "hello@skylineconstructions.in",
+        website: "https://skylineconstructions.in",
+        address: "No. 42, 2nd Avenue, Anna Nagar East, Chennai - 600040",
+        services: [
+            "Turnkey Construction",
+            "Structural Design",
+            "Interior Design",
+            "Vastu Consultation",
+            "Project Management",
+        ],
+        specialties: ["Luxury Villas", "Smart Homes", "High-Rise Apartments"],
+        certifications: [
+            "ISO 9001:2015",
+            "Green Building Certified",
+            "PMP Certified Team",
+        ],
+        workingHours: "Mon - Sat: 9:00 AM - 7:00 PM",
+        isVerified: true,
+        projects: [sharedProjects[0], sharedProjects[1], sharedProjects[2]],
+        engineerIds: ["1", "2"],
+    },
+    {
+        id: "c2",
+        name: "GreenNest Builders",
+        tagline: "Sustainable Homes for a Better Future",
+        description:
+            "GreenNest Builders focuses exclusively on eco-friendly and energy-efficient homes across Coimbatore and surrounding districts. Solar integration, rainwater harvesting and green materials are our DNA.",
+        district: "Coimbatore",
+        location: "RS Puram, Coimbatore",
+        pincode: "641002",
+        lat: 11.0168,
+        lng: 76.9558,
+        logo: "https://i.pravatar.cc/150?img=13",
+        coverImage:
+            "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200",
+        rating: 4.8,
+        totalProjects: 187,
+        yearEstablished: 2012,
+        teamSize: 42,
+        phone: "+91 98765 43211",
+        email: "contact@greennest.in",
+        address: "15, Avinashi Road, RS Puram, Coimbatore - 641002",
+        services: [
+            "Eco-Friendly Construction",
+            "Solar Integration",
+            "Landscaping",
+            "Structural Design",
+        ],
+        specialties: ["Eco Homes", "Farm Houses", "Net-Zero Homes"],
+        certifications: [
+            "LEED Accredited",
+            "Solar Energy Specialist",
+            "B.Tech Civil Team",
+        ],
+        workingHours: "Mon - Sat: 8:30 AM - 6:30 PM",
+        isVerified: true,
+        projects: [sharedProjects[2], sharedProjects[4]],
+        engineerIds: ["4"],
+    },
+    {
+        id: "c3",
+        name: "Heritage Homes TN",
+        tagline: "Tradition Meets Modern Living",
+        description:
+            "Based in Madurai, Heritage Homes TN is the go-to firm for traditional Tamil architecture blended with modern comforts. Experts in Vastu, Chettinad style and temple-related construction.",
+        district: "Madurai",
+        location: "KK Nagar, Madurai",
+        pincode: "625020",
+        lat: 9.9252,
+        lng: 78.1198,
+        logo: "https://i.pravatar.cc/150?img=3",
+        coverImage:
+            "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200",
+        rating: 4.7,
+        totalProjects: 256,
+        yearEstablished: 2001,
+        teamSize: 68,
+        phone: "+91 98765 43212",
+        email: "info@heritagehomestn.com",
+        address: "78, KK Nagar Main Road, Madurai - 625020",
+        services: [
+            "Traditional Architecture",
+            "Vastu Consultation",
+            "Temple Construction",
+            "Interior Design",
+            "Heritage Restoration",
+        ],
+        specialties: [
+            "Traditional Homes",
+            "Chettinad Style",
+            "Religious Structures",
+        ],
+        certifications: [
+            "Vastu Shastra Expert",
+            "Heritage Conservation Certified",
+            "B.E. Civil",
+        ],
+        workingHours: "Mon - Sun: 9:00 AM - 8:00 PM",
+        isVerified: true,
+        projects: [sharedProjects[3], sharedProjects[0]],
+        engineerIds: ["3"],
+    },
+    {
+        id: "c4",
+        name: "UrbanForge Constructions",
+        tagline: "Smart Spaces. Smarter Living.",
+        description:
+            "Young and dynamic firm from Coimbatore specializing in affordable housing, studio apartments and IoT-integrated smart homes. Perfect for first-time home buyers and tech-savvy families.",
+        district: "Coimbatore",
+        location: "Gandhipuram, Coimbatore",
+        pincode: "641012",
+        lat: 11.0183,
+        lng: 76.9725,
+        logo: "https://i.pravatar.cc/150?img=8",
+        coverImage:
+            "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200",
+        rating: 4.6,
+        totalProjects: 94,
+        yearEstablished: 2018,
+        teamSize: 28,
+        phone: "+91 98765 43213",
+        email: "hello@urbanforge.in",
+        address: "22, Cross Cut Road, Gandhipuram, Coimbatore - 641012",
+        services: [
+            "Smart Home Integration",
+            "Affordable Housing",
+            "Structural Design",
+            "Interior Design",
+            "Plumbing & Electrical",
+        ],
+        specialties: ["Smart Homes", "Studio Apartments", "Affordable Housing"],
+        certifications: [
+            "Smart Home Technology Certified",
+            "AutoCAD Professional",
+            "B.E. Civil",
+        ],
+        workingHours: "Mon - Fri: 9:00 AM - 6:00 PM",
+        isVerified: true,
+        projects: [sharedProjects[4], sharedProjects[1]],
+        engineerIds: ["4"],
+    },
+    {
+        id: "c5",
+        name: "Trichy BuildWell",
+        tagline: "Quality Construction. Honest Pricing.",
+        description:
+            "Serving Tiruchirappalli and central Tamil Nadu for over 15 years. Known for transparent sq.ft pricing, strong structural work and excellent after-sales support.",
+        district: "Tiruchirappalli",
+        location: "Thillai Nagar, Trichy",
+        pincode: "620018",
+        lat: 10.7905,
+        lng: 78.7047,
+        logo: "https://i.pravatar.cc/150?img=33",
+        coverImage:
+            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200",
+        rating: 4.8,
+        totalProjects: 203,
+        yearEstablished: 2009,
+        teamSize: 55,
+        phone: "+91 98765 43214",
+        email: "support@trichybuildwell.com",
+        address: "12, 9th Cross, Thillai Nagar, Tiruchirappalli - 620018",
+        services: [
+            "Residential Construction",
+            "Commercial Buildings",
+            "Structural Design",
+            "Project Management",
+        ],
+        specialties: ["Individual Houses", "Commercial Complexes"],
+        certifications: ["ISO 9001", "B.E. Civil Team"],
+        workingHours: "Mon - Sat: 9:00 AM - 6:30 PM",
+        isVerified: true,
+        projects: [sharedProjects[1], sharedProjects[0]],
+        engineerIds: [],
+    },
+];
+
+// Engineers
 export const mockEngineers: Engineer[] = [
     {
         id: "1",
+        companyId: "c1",
         name: "Rajesh Kumar",
         location: "Anna Nagar, Chennai",
         district: "Chennai",
@@ -99,9 +323,10 @@ export const mockEngineers: Engineer[] = [
             "Vastu Consultation",
         ],
         phone: "+91 98765 43210",
-        email: "rajesh.kumar@dreamhouse.in",
+        email: "rajesh.kumar@skylineconstructions.in",
         image: "https://i.pravatar.cc/300?img=11",
-        coverImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200",
+        coverImage:
+            "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200",
         description:
             "Expert in modern residential construction with 15+ years of experience in luxury homes. Specialized in earthquake-resistant structures and smart home integration.",
         projectsCompleted: 127,
@@ -121,50 +346,11 @@ export const mockEngineers: Engineer[] = [
         ],
         workingHours: "Mon - Sat: 9:00 AM - 7:00 PM",
         languages: ["Tamil", "English", "Hindi"],
-        recentProjects: [
-            {
-                id: "p1",
-                title: "Luxury 3BHK Villa",
-                location: "OMR, Chennai",
-                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800",
-                year: "2023",
-                area: "2,800 sq.ft",
-                duration: "10 Months",
-                budget: "₹52 Lakhs",
-                style: "Modern Contemporary",
-                description: "A stunning 3BHK independent villa featuring a double-height living room, floor-to-ceiling glass windows, and a private swimming pool. Built with premium AAC blocks and earthquake-resistant structure.",
-                features: ["Smart Home Automation", "Solar Water Heating", "Rainwater Harvesting", "Italian Marble Flooring", "Home Theater"]
-            },
-            {
-                id: "p2",
-                title: "Modern Duplex House",
-                location: "Anna Nagar, Chennai",
-                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-                year: "2022",
-                area: "1,850 sq.ft",
-                duration: "7 Months",
-                budget: "₹34 Lakhs",
-                style: "Minimalist Urban",
-                description: "A compact yet spacious duplex designed for a nuclear family. Optimized for natural ventilation and maximum daylight. Features a modular kitchen and a rooftop terrace garden.",
-                features: ["Modular Kitchen", "Rooftop Garden", "CCTV Surveillance", "EV Charging Point", "Vastu Compliant"]
-            },
-            {
-                id: "p3",
-                title: "Eco-Friendly Home",
-                location: "ECR, Chennai",
-                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
-                year: "2023",
-                area: "3,200 sq.ft",
-                duration: "12 Months",
-                budget: "₹65 Lakhs",
-                style: "Sustainable Green Architecture",
-                description: "A 100% eco-friendly home built using recycled materials and sustainable practices. Features a zero-electricity billing design with integrated wind and solar energy systems.",
-                features: ["100% Solar Powered", "Greywater Recycling", "Bamboo Accents", "Green Roof", "Organic Waste Composter"]
-            }
-        ]
+        recentProjects: [sharedProjects[0], sharedProjects[1], sharedProjects[2]],
     },
     {
         id: "2",
+        companyId: "c1",
         name: "Suresh Babu",
         location: "T. Nagar, Chennai",
         district: "Chennai",
@@ -180,18 +366,15 @@ export const mockEngineers: Engineer[] = [
             "Eco-Friendly Construction",
         ],
         phone: "+91 98765 43211",
-        email: "suresh.babu@dreamhouse.in",
+        email: "suresh.babu@skylineconstructions.in",
         image: "https://i.pravatar.cc/300?img=13",
-        coverImage: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200",
+        coverImage:
+            "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200",
         description:
             "Specialized in eco-friendly and sustainable construction practices. Expert in solar-integrated homes and rainwater harvesting systems.",
         projectsCompleted: 89,
-        availability: "Available",
-        projectTypes: [
-            "Eco Homes",
-            "Farm Houses",
-            "Residential Complexes",
-        ],
+        availability: "Busy",
+        projectTypes: ["Eco Homes", "Farm Houses", "Residential Complexes"],
         teamSize: 18,
         certifications: [
             "B.Tech Civil Engineering",
@@ -200,51 +383,11 @@ export const mockEngineers: Engineer[] = [
         ],
         workingHours: "Mon - Sat: 8:30 AM - 6:30 PM",
         languages: ["Tamil", "English"],
-        recentProjects: [
-            {
-                id: "p1",
-                title: "Luxury 3BHK Villa",
-                location: "OMR, Chennai",
-                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800",
-                year: "2023",
-                area: "2,800 sq.ft",
-                duration: "10 Months",
-                budget: "₹52 Lakhs",
-                style: "Modern Contemporary",
-                description: "A stunning 3BHK independent villa featuring a double-height living room, floor-to-ceiling glass windows, and a private swimming pool. Built with premium AAC blocks and earthquake-resistant structure.",
-                features: ["Smart Home Automation", "Solar Water Heating", "Rainwater Harvesting", "Italian Marble Flooring", "Home Theater"]
-            },
-            {
-                id: "p2",
-                title: "Modern Duplex House",
-                location: "Anna Nagar, Chennai",
-                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-                year: "2022",
-                area: "1,850 sq.ft",
-                duration: "7 Months",
-                budget: "₹34 Lakhs",
-                style: "Minimalist Urban",
-                description: "A compact yet spacious duplex designed for a nuclear family. Optimized for natural ventilation and maximum daylight. Features a modular kitchen and a rooftop terrace garden.",
-                features: ["Modular Kitchen", "Rooftop Garden", "CCTV Surveillance", "EV Charging Point", "Vastu Compliant"]
-            },
-            {
-                id: "p3",
-                title: "Eco-Friendly Home",
-                location: "ECR, Chennai",
-                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
-                year: "2023",
-                area: "3,200 sq.ft",
-                duration: "12 Months",
-                budget: "₹65 Lakhs",
-                style: "Sustainable Green Architecture",
-                description: "A 100% eco-friendly home built using recycled materials and sustainable practices. Features a zero-electricity billing design with integrated wind and solar energy systems.",
-                features: ["100% Solar Powered", "Greywater Recycling", "Bamboo Accents", "Green Roof", "Organic Waste Composter"]
-            }
-        ]
+        recentProjects: [sharedProjects[2]],
     },
-
     {
         id: "3",
+        companyId: "c3",
         name: "Murugan S",
         location: "KK Nagar, Madurai",
         district: "Madurai",
@@ -261,13 +404,14 @@ export const mockEngineers: Engineer[] = [
             "Temple Construction",
         ],
         phone: "+91 98765 43212",
-        email: "murugan.s@dreamhouse.in",
+        email: "murugan.s@heritagehomestn.com",
         image: "https://i.pravatar.cc/300?img=3",
-        coverImage: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200",
+        coverImage:
+            "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200",
         description:
             "Traditional + Modern construction expert with Vastu knowledge. 20 years of experience in building homes that blend heritage with modern amenities.",
         projectsCompleted: 156,
-        availability: "Busy",
+        availability: "Available",
         projectTypes: [
             "Traditional Homes",
             "Luxury Villas",
@@ -282,50 +426,11 @@ export const mockEngineers: Engineer[] = [
         ],
         workingHours: "Mon - Sun: 9:00 AM - 8:00 PM",
         languages: ["Tamil", "English", "Hindi"],
-        recentProjects: [
-            {
-                id: "p1",
-                title: "Luxury 3BHK Villa",
-                location: "OMR, Chennai",
-                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800",
-                year: "2023",
-                area: "2,800 sq.ft",
-                duration: "10 Months",
-                budget: "₹52 Lakhs",
-                style: "Modern Contemporary",
-                description: "A stunning 3BHK independent villa featuring a double-height living room, floor-to-ceiling glass windows, and a private swimming pool. Built with premium AAC blocks and earthquake-resistant structure.",
-                features: ["Smart Home Automation", "Solar Water Heating", "Rainwater Harvesting", "Italian Marble Flooring", "Home Theater"]
-            },
-            {
-                id: "p2",
-                title: "Modern Duplex House",
-                location: "Anna Nagar, Chennai",
-                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-                year: "2022",
-                area: "1,850 sq.ft",
-                duration: "7 Months",
-                budget: "₹34 Lakhs",
-                style: "Minimalist Urban",
-                description: "A compact yet spacious duplex designed for a nuclear family. Optimized for natural ventilation and maximum daylight. Features a modular kitchen and a rooftop terrace garden.",
-                features: ["Modular Kitchen", "Rooftop Garden", "CCTV Surveillance", "EV Charging Point", "Vastu Compliant"]
-            },
-            {
-                id: "p3",
-                title: "Eco-Friendly Home",
-                location: "ECR, Chennai",
-                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
-                year: "2023",
-                area: "3,200 sq.ft",
-                duration: "12 Months",
-                budget: "₹65 Lakhs",
-                style: "Sustainable Green Architecture",
-                description: "A 100% eco-friendly home built using recycled materials and sustainable practices. Features a zero-electricity billing design with integrated wind and solar energy systems.",
-                features: ["100% Solar Powered", "Greywater Recycling", "Bamboo Accents", "Green Roof", "Organic Waste Composter"]
-            }
-        ]
+        recentProjects: [sharedProjects[3], sharedProjects[0]],
     },
     {
         id: "4",
+        companyId: "c2",
         name: "Karthik R",
         location: "RS Puram, Coimbatore",
         district: "Coimbatore",
@@ -341,18 +446,15 @@ export const mockEngineers: Engineer[] = [
             "Smart Home Integration",
         ],
         phone: "+91 98765 43213",
-        email: "karthik.r@dreamhouse.in",
+        email: "karthik.r@greennest.in",
         image: "https://i.pravatar.cc/300?img=8",
-        coverImage: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200",
+        coverImage:
+            "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200",
         description:
             "Young and innovative engineer specializing in smart home construction and affordable housing. Expert in IoT-integrated homes.",
         projectsCompleted: 64,
-        availability: "Available",
-        projectTypes: [
-            "Smart Homes",
-            "Affordable Housing",
-            "Studio Apartments",
-        ],
+        availability: "On Leave",
+        projectTypes: ["Smart Homes", "Affordable Housing", "Studio Apartments"],
         teamSize: 12,
         certifications: [
             "B.E. Civil Engineering",
@@ -361,46 +463,121 @@ export const mockEngineers: Engineer[] = [
         ],
         workingHours: "Mon - Fri: 9:00 AM - 6:00 PM",
         languages: ["Tamil", "English"],
-        recentProjects: [
-            {
-                id: "p1",
-                title: "Luxury 3BHK Villa",
-                location: "OMR, Chennai",
-                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800",
-                year: "2023",
-                area: "2,800 sq.ft",
-                duration: "10 Months",
-                budget: "₹52 Lakhs",
-                style: "Modern Contemporary",
-                description: "A stunning 3BHK independent villa featuring a double-height living room, floor-to-ceiling glass windows, and a private swimming pool. Built with premium AAC blocks and earthquake-resistant structure.",
-                features: ["Smart Home Automation", "Solar Water Heating", "Rainwater Harvesting", "Italian Marble Flooring", "Home Theater"]
-            },
-            {
-                id: "p2",
-                title: "Modern Duplex House",
-                location: "Anna Nagar, Chennai",
-                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-                year: "2022",
-                area: "1,850 sq.ft",
-                duration: "7 Months",
-                budget: "₹34 Lakhs",
-                style: "Minimalist Urban",
-                description: "A compact yet spacious duplex designed for a nuclear family. Optimized for natural ventilation and maximum daylight. Features a modular kitchen and a rooftop terrace garden.",
-                features: ["Modular Kitchen", "Rooftop Garden", "CCTV Surveillance", "EV Charging Point", "Vastu Compliant"]
-            },
-            {
-                id: "p3",
-                title: "Eco-Friendly Home",
-                location: "ECR, Chennai",
-                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
-                year: "2023",
-                area: "3,200 sq.ft",
-                duration: "12 Months",
-                budget: "₹65 Lakhs",
-                style: "Sustainable Green Architecture",
-                description: "A 100% eco-friendly home built using recycled materials and sustainable practices. Features a zero-electricity billing design with integrated wind and solar energy systems.",
-                features: ["100% Solar Powered", "Greywater Recycling", "Bamboo Accents", "Green Roof", "Organic Waste Composter"]
-            }
-        ]
+        recentProjects: [sharedProjects[4]],
     },
 ];
+
+// Reviews
+export const mockReviews: Review[] = [
+    {
+        id: "r1",
+        clientName: "Vignesh Kumar",
+        clientImage: "https://i.pravatar.cc/150?img=68",
+        engineerName: "Rajesh Kumar",
+        companyName: "Skyline Constructions",
+        projectType: "3BHK Luxury Villa",
+        location: "OMR, Chennai",
+        rating: 5,
+        reviewText:
+            "Rajesh sir is extremely professional. He completed our 3BHK villa 2 weeks ahead of schedule. The material quality was exactly as promised. No hidden costs at all! Truly a dream home.",
+        date: "Oct 2025",
+        isVerified: true,
+        projectImage:
+            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600",
+    },
+    {
+        id: "r2",
+        clientName: "Priya Ramesh",
+        clientImage: "https://i.pravatar.cc/150?img=44",
+        engineerName: "Suresh Babu",
+        companyName: "Skyline Constructions",
+        projectType: "Eco-Friendly Home",
+        location: "RS Puram, Coimbatore",
+        rating: 5,
+        reviewText:
+            "We wanted a solar-powered home, and Suresh sir delivered beyond expectations. Our electricity bill is almost zero now! Highly recommended for green homes.",
+        date: "Aug 2025",
+        isVerified: true,
+    },
+    {
+        id: "r3",
+        clientName: "Karthikeyan S",
+        clientImage: "https://i.pravatar.cc/150?img=12",
+        engineerName: "Murugan S",
+        companyName: "Heritage Homes TN",
+        projectType: "Traditional 4BHK",
+        location: "KK Nagar, Madurai",
+        rating: 4,
+        reviewText:
+            "Murugan sir has great knowledge in Vastu and traditional architecture. The woodwork in our house is stunning. Slight delay in plumbing, but overall a great experience.",
+        date: "Sep 2025",
+        isVerified: true,
+        projectImage:
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600",
+    },
+    {
+        id: "r4",
+        clientName: "Anitha Devi",
+        clientImage: "https://i.pravatar.cc/150?img=5",
+        engineerName: "Karthik R",
+        companyName: "GreenNest Builders",
+        projectType: "Smart Studio Apartment",
+        location: "Gandhipuram, Coimbatore",
+        rating: 5,
+        reviewText:
+            "Karthik integrated Alexa and smart lighting perfectly into our small apartment. Space utilization was 10/10. Very modern approach!",
+        date: "Nov 2025",
+        isVerified: true,
+    },
+    {
+        id: "r5",
+        clientName: "Rahul & Sneha",
+        clientImage: "https://i.pravatar.cc/150?img=33",
+        engineerName: "Rajesh Kumar",
+        companyName: "Skyline Constructions",
+        projectType: "Farmhouse",
+        location: "Yercaud, Salem",
+        rating: 5,
+        reviewText:
+            "Building a farmhouse in a hilly area was tough, but the team handled the terrain perfectly. The stone finishing looks absolutely royal.",
+        date: "Jul 2025",
+        isVerified: true,
+        projectImage:
+            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600",
+    },
+    {
+        id: "r6",
+        clientName: "Mohammed Irfan",
+        clientImage: "https://i.pravatar.cc/150?img=53",
+        engineerName: "Rajesh Kumar",
+        companyName: "Skyline Constructions",
+        projectType: "Commercial Complex",
+        location: "T. Nagar, Chennai",
+        rating: 5,
+        reviewText:
+            "Handled our 3-story commercial building with strict adherence to safety norms. The fire safety and electrical planning were top-notch.",
+        date: "Jun 2025",
+        isVerified: true,
+    },
+];
+
+// Helper functions
+export function getCompanyById(id: string): Company | undefined {
+    return mockCompanies.find((c) => c.id === id);
+}
+
+export function getEngineersByCompany(companyId: string): Engineer[] {
+    return mockEngineers.filter((e) => e.companyId === companyId);
+}
+
+export function getCompaniesByDistrict(district: string): Company[] {
+    if (!district) return [];
+    return mockCompanies.filter((c) =>
+        c.district.toLowerCase().includes(district.toLowerCase())
+    );
+}
+
+export function getCompaniesByPincode(pincode: string): Company[] {
+    if (!pincode || pincode.length < 6) return [];
+    return mockCompanies.filter((c) => c.pincode.startsWith(pincode.slice(0, 3)));
+}
