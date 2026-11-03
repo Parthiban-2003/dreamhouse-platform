@@ -1,226 +1,216 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import {
     Home,
     Phone,
     Mail,
     MapPin,
-    ArrowUpRight,
     Send,
     Sparkles,
+    Building2,
+    ArrowUpRight,
 } from "lucide-react";
-import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
-import { useState } from "react";
+import { toast } from "sonner";
 
-const socialLinks = [
-    { icon: FaFacebook, href: "#", label: "Facebook" },
-    { icon: FaInstagram, href: "#", label: "Instagram" },
-    { icon: FaTwitter, href: "#", label: "Twitter" },
-    { icon: FaLinkedin, href: "#", label: "LinkedIn" },
-];
+const footerLinks = {
+    explore: [
+        { href: "/", label: "Home" },
+        { href: "/find-companies", label: "Find Companies" },
+        { href: "/about", label: "About Us" },
+        { href: "/testimonials", label: "Testimonials" },
+        { href: "/contact", label: "Contact" },
+    ],
+    forCompanies: [
+        { href: "/contact", label: "List your company" },
+        { href: "/contact", label: "Partnerships" },
+        { href: "/about", label: "Why DreamHouse" },
+    ],
+    support: [
+        { href: "/contact", label: "Help center" },
+        { href: "/contact", label: "Report an issue" },
+        { href: "/testimonials", label: "Client stories" },
+    ],
+};
 
-const Footer = () => {
+export default function Footer() {
     const [email, setEmail] = useState("");
 
     const handleSubscribe = (e: React.FormEvent) => {
         e.preventDefault();
+        if (!email.trim()) return;
+        toast.success("Subscribed!", {
+            description: "Construction tips & offers will hit your inbox.",
+        });
         setEmail("");
     };
 
     return (
-        <footer className="relative mt-auto overflow-hidden bg-slate-950 text-stone-300">
-            <div className="pointer-events-none absolute left-1/2 top-0 h-[380px] w-[720px] -translate-x-1/2 rounded-full bg-blue-500/[0.07] blur-[100px]" />
-            <div className="pointer-events-none absolute -left-32 bottom-0 h-64 w-64 rounded-full bg-teal-500/[0.06] blur-[80px]" />
-            <div className="pointer-events-none absolute -right-24 top-1/3 h-72 w-72 rounded-full bg-blue-600/[0.05] blur-[90px]" />
-
-            <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-                <div className="border-b border-white/[0.06] py-14 md:py-16">
-                    <div className="grid items-center gap-10 lg:grid-cols-2">
+        <footer className="relative mt-auto overflow-hidden bg-indigo-950 text-stone-300">
+            <div className="pointer-events-none absolute left-1/2 top-0 h-[320px] w-[600px] -translate-x-1/2 rounded-full bg-indigo-500/10 blur-[100px]" />
+            <div className="pointer-events-none absolute -right-20 bottom-0 h-64 w-64 rounded-full bg-amber-500/10 blur-[80px]" />
+            <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                {/* Newsletter */}
+                <div className="border-b border-white/10 py-12 md:py-14">
+                    <div className="grid items-center gap-8 lg:grid-cols-2">
                         <div>
-                            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[1.8px] text-blue-300/90">
+                            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-amber-300/90">
                                 <Sparkles size={12} />
-                                Stay in the loop
+                                Newsletter
                             </div>
-                            <h3 className="font-heading text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-[34px] md:leading-[1.2]">
+                            <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
                                 Stay updated with{" "}
-                                <span className="bg-gradient-to-r from-blue-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">
+                                <span className="bg-gradient-to-r from-amber-300 to-amber-100 bg-clip-text text-transparent">
                                     DreamHouse
                                 </span>
                             </h3>
-                            <p className="mt-3 max-w-md text-sm leading-relaxed text-white/50 md:text-[15px]">
-                                Construction tips, market trends & exclusive offers — delivered
-                                straight to your inbox.
+                            <p className="mt-2 max-w-md text-sm text-indigo-200/70 leading-relaxed">
+                                Tips on building, verified companies near you, and exclusive
+                                offers — no spam.
                             </p>
                         </div>
 
                         <form
                             onSubmit={handleSubscribe}
-                            className="flex flex-col gap-3 sm:flex-row"
+                            className="flex flex-col sm:flex-row gap-3"
                         >
+                            {/* email */}
                             <div className="relative flex-1">
-                                <Mail className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-white/30" />
+                                <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/35" />
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="Enter your email"
                                     required
-                                    className="w-full rounded-2xl border border-white/10 bg-white/[0.04] py-3.5 pl-12 pr-4 text-white placeholder:text-white/30 transition-all focus:border-blue-500/40 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                                    className="w-full rounded-xl border border-white/10 bg-white/5 py-3.5 pl-11 pr-4 text-sm text-white placeholder:text-white/35 focus:border-amber-400/40 focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition-all"
                                 />
                             </div>
                             <button
                                 type="submit"
-                                className="group relative flex shrink-0 items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-teal-600 px-7 py-3.5 font-semibold text-white shadow-lg shadow-blue-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/30"
+                                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 px-6 py-3.5 text-sm font-bold text-indigo-950 shadow-lg shadow-amber-500/20 hover:from-amber-400 hover:to-amber-300 transition-all shrink-0"
                             >
-                                <span className="absolute inset-0 -translate-x-full skew-x-[-15deg] bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-[200%]" />
-                                <span className="relative">Subscribe</span>
-                                <Send className="relative h-4 w-4" />
+                                Subscribe
+                                <Send className="h-4 w-4" />
                             </button>
                         </form>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-8 py-14 md:grid-cols-4 md:py-16 lg:grid-cols-5 lg:gap-10">
-                    {/* Brand */}
-                    <div className="col-span-2 space-y-5 md:col-span-4 lg:col-span-2">
-                        <Link href="/" className="group inline-flex items-center gap-3">
-                            <div className="relative">
-                                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-blue-500 to-teal-500 opacity-40 blur transition-opacity duration-300 group-hover:opacity-70" />
-                                <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900 to-slate-800 shadow-lg">
-                                    <Home className="h-5 w-5 text-blue-400" strokeWidth={1.7} />
-                                </div>
+                {/* Links */}
+                <div className="grid grid-cols-2 gap-10 py-12 md:grid-cols-4 lg:grid-cols-5 lg:gap-8">
+                    <div className="col-span-2 space-y-5">
+                        <Link href="/" className="inline-flex items-center gap-3 group">
+                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-700 to-indigo-900 flex items-center justify-center border border-white/10 shadow-lg">
+                                <Home className="w-5 h-5 text-amber-400" />
                             </div>
-                            <div className="flex flex-col">
-                                <span className="font-heading text-[19px] font-bold leading-none tracking-tight text-white">
-                                    DreamHouse
-                                    <span className="text-teal-400">.</span>
+                            <div>
+                                <span className="font-bold text-lg text-white tracking-tight">
+                                    DreamHouse<span className="text-amber-400">.</span>
                                 </span>
-                                <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-white/40">
-                                    Spaces to belong
-                                </span>
+                                <p className="text-[10px] text-indigo-300/70 uppercase tracking-widest">
+                                    Spaces to Belong
+                                </p>
                             </div>
                         </Link>
-
-                        <p className="max-w-xs text-sm leading-relaxed text-white/45">
-                            Tamil Nadu&apos;s most trusted platform for finding verified civil
-                            engineers, calculating construction costs, and building your dream home.
+                        <p className="text-sm text-indigo-200/60 leading-relaxed max-w-xs">
+                            Find verified construction companies across Tamil Nadu. Transparent
+                            pricing. Quality homes.
                         </p>
-
-                        <div className="flex items-center gap-2.5">
-                            {socialLinks.map(({ icon: Icon, href, label }) => (
-                                <a
-                                    key={label}
-                                    href={href}
-                                    aria-label={label}
-                                    className="group flex h-10 w-10 items-center justify-center rounded-xl border border-white/8 bg-white/[0.03] text-white/40 transition-all duration-300 hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-blue-400 hover:shadow-[0_0_16px_rgba(59,130,246,0.15)]"
-                                >
-                                    <Icon className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
-                                </a>
-                            ))}
+                        <div className="space-y-2 text-sm">
+                            <a
+                                href="tel:+919876543210"
+                                className="flex items-center gap-2 text-indigo-200/80 hover:text-amber-300 transition-colors"
+                            >
+                                <Phone className="w-3.5 h-3.5" />
+                                +91 98765 43210
+                            </a>
+                            <a
+                                href="mailto:support@dreamhouse.in"
+                                className="flex items-center gap-2 text-indigo-200/80 hover:text-amber-300 transition-colors"
+                            >
+                                <Mail className="w-3.5 h-3.5" />
+                                support@dreamhouse.in
+                            </a>
+                            <p className="flex items-center gap-2 text-indigo-200/80">
+                                <MapPin className="w-3.5 h-3.5 shrink-0" />
+                                Anna Nagar, Chennai · 600040
+                            </p>
                         </div>
                     </div>
 
-                    {/* Platform */}
                     <div>
-                        <h4 className="mb-5 text-[11px] font-semibold uppercase tracking-[2px] text-white/80">
-                            Platform
+                        <h4 className="text-xs font-semibold uppercase tracking-widest text-white mb-4">
+                            Explore
                         </h4>
-                        <ul className="space-y-3.5 text-sm">
-                            {[
-                                { label: "Find Engineers", href: "/find-engineers" },
-                                { label: "Happy Homes", href: "/reviews" },
-                                { label: "Cost Calculator", href: "/cost-calculator" },
-                                { label: "Project Tracking", href: "#" },
-                            ].map((link) => (
-                                <li key={link.label}>
+                        <ul className="space-y-2.5">
+                            {footerLinks.explore.map((l) => (
+                                <li key={l.href + l.label}>
                                     <Link
-                                        href={link.href}
-                                        className="group flex items-center gap-1 text-white/40 transition-colors duration-200 hover:text-white"
+                                        href={l.href}
+                                        className="text-sm text-indigo-200/70 hover:text-amber-300 transition-colors"
                                     >
-                                        {link.label}
-                                        <ArrowUpRight className="h-3 w-3 -translate-x-1.5 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
+                                        {l.label}
                                     </Link>
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    {/* Company */}
+                    {/* Companies */}
                     <div>
-                        <h4 className="mb-5 text-[11px] font-semibold uppercase tracking-[2px] text-white/80">
-                            Company
+                        <h4 className="text-xs font-semibold uppercase tracking-widest text-white mb-4 flex items-center gap-1.5">
+                            <Building2 className="w-3.5 h-3.5 text-amber-400" />
+                            Companies
                         </h4>
-                        <ul className="space-y-3.5 text-sm">
-                            {[
-                                { label: "About Us", href: "/about" },
-                                { label: "Contact", href: "/contact" },
-                                { label: "Careers", href: "#" },
-                                { label: "Privacy Policy", href: "#" },
-                            ].map((link) => (
-                                <li key={link.label}>
+                        <ul className="space-y-2.5">
+                            {footerLinks.forCompanies.map((l) => (
+                                <li key={l.label}>
                                     <Link
-                                        href={link.href}
-                                        className="group flex items-center gap-1 text-white/40 transition-colors duration-200 hover:text-white"
+                                        href={l.href}
+                                        className="text-sm text-indigo-200/70 hover:text-amber-300 transition-colors"
                                     >
-                                        {link.label}
-                                        <ArrowUpRight className="h-3 w-3 -translate-x-1.5 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
+                                        {l.label}
                                     </Link>
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    {/* Contact */}
+                    {/* Support */}
                     <div>
-                        <h4 className="mb-5 text-[11px] font-semibold uppercase tracking-[2px] text-white/80">
-                            Contact
+                        <h4 className="text-xs font-semibold uppercase tracking-widest text-white mb-4">
+                            Support
                         </h4>
-                        <ul className="space-y-4 text-sm text-white/45">
-                            <li className="flex items-start gap-3">
-                                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-400/80" />
-                                <span>Chennai, Tamil Nadu, India</span>
-                            </li>
-                            <li className="flex items-center gap-3">
-                                <Mail className="h-4 w-4 shrink-0 text-blue-400/80" />
-                                <a
-                                    href="mailto:support@dreamhouse.in"
-                                    className="transition-colors hover:text-white"
-                                >
-                                    support@dreamhouse.in
-                                </a>
-                            </li>
-                            <li className="flex items-center gap-3">
-                                <Phone className="h-4 w-4 shrink-0 text-blue-400/80" />
-                                <a
-                                    href="tel:+919876543210"
-                                    className="transition-colors hover:text-white"
-                                >
-                                    +91 98765 43210
-                                </a>
-                            </li>
+                        <ul className="space-y-2.5">
+                            {footerLinks.support.map((l) => (
+                                <li key={l.label}>
+                                    <Link
+                                        href={l.href}
+                                        className="text-sm text-indigo-200/70 hover:text-amber-300 transition-colors"
+                                    >
+                                        {l.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
+                        {/* Find Companies */}
+                        <Link
+                            href="/find-companies"
+                            className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-amber-300 hover:text-amber-200 transition-colors"
+                        >
+                            Find companies
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                        </Link>
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] py-7 sm:flex-row">
-                    <p className="text-sm text-white/30">
-                        © {new Date().getFullYear()} DreamHouse. All rights reserved. Built
-                        with ❤️ in Tamil Nadu.
-                    </p>
-                    <div className="flex items-center gap-6 text-sm text-white/30">
-                        <Link href="#" className="transition-colors hover:text-white/70">
-                            Privacy Policy
-                        </Link>
-                        <Link href="#" className="transition-colors hover:text-white/70">
-                            Terms of Service
-                        </Link>
-                    </div>
+                <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-indigo-300/50">
+                    <p>© {new Date().getFullYear()} DreamHouse. All rights reserved.</p>
+                    <p>Built for Tamil Nadu home builders</p>
                 </div>
             </div>
         </footer>
     );
-};
-
-export default Footer;
+}
