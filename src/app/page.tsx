@@ -1,13 +1,13 @@
 import HeroSection from "@/src/features/home/components/HeroSection";
 import TrustedSection from "@/src/features/home/components/TrustedSection";
 import HowItWorks from "@/src/features/home/components/HowItWorks";
-// import FeaturedEngineers from "@/src/features/home/components/FeaturedEngineers";
 import FAQSection from "@/src/features/home/components/FAQSection";
 import FinalCTA from "@/src/features/home/components/FinalCTA";
 
 export const metadata = {
   title: "Home | DreamHouse - Build Your Dream Home in Tamil Nadu",
-  description: "Find verified civil engineers, calculate construction costs, and explore top-rated experts near you.",
+  description:
+    "Find verified construction companies and civil engineers across Tamil Nadu. Transparent pricing, quality homes.",
 };
 
 export default function HomePage() {
@@ -16,7 +16,6 @@ export default function HomePage() {
       <HeroSection />
       <TrustedSection />
       <HowItWorks />
-      {/* <FeaturedEngineers /> */}
       <FAQSection />
       <FinalCTA />
     </div>
